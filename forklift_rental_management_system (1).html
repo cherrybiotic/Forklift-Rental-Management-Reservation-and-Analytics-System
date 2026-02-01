@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forklift Rental Management System</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#f4f6f8; }
+    header { background:#3b3b3b; color:white; padding:15px 30px; display:flex; justify-content:space-between; align-items:center; }
+    nav button { margin-left:15px; padding:8px 14px; border:none; border-radius:5px; cursor:pointer; }
+    .primary { background:#2c3e50; color:white; }
+    .secondary { background:#bdc3c7; }
+    .hero { background:#2c3e50; color:white; padding:80px 40px; text-align:center; }
+    .container { padding:30px; }
+    .card { background:white; border-radius:8px; padding:20px; margin-bottom:20px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; }
+    button { background:#2c3e50; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; }
+    input { width:100%; padding:10px; margin-bottom:10px; }
+    table { width:100%; border-collapse:collapse; }
+    th, td { padding:10px; border-bottom:1px solid #ddd; text-align:left; }
+    .hidden { display:none; }
+    .status-available { color:green; font-weight:bold; }
+    .status-rented { color:orange; font-weight:bold; }
+    .status-maintenance { color:red; font-weight:bold; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div><strong>REDBRICK CORPORATION</strong></div>
+  <nav id="nav">
+    <button class="secondary" onclick="showSection('login')">Login</button>
+    <button class="primary" onclick="showSection('register')">Register</button>
+  </nav>
+</header>
+
+<!-- HOMEPAGE -->
+<section id="home" class="hero">
+  <h1>Forklift Rental Management System</h1>
+  <p>Reserve forklifts, track rentals, receive alerts, and analyze usage.</p>
+</section>
+
+<!-- LOGIN -->
+<section id="login" class="container hidden">
+  <div class="card">
+    <h2>Login</h2>
+    <input type="text" placeholder="Username" id="loginUser" />
+    <select id="role">
+      <option value="customer">Customer</option>
+      <option value="owner">Owner</option>
+    </select><br><br>
+    <button onclick="login()">Login</button>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section id="register" class="container hidden">
+  <div class="card">
+    <h2>Register</h2>
+    <input type="email" placeholder="Email" />
+    <input type="text" placeholder="Username" />
+    <input type="password" placeholder="Password" />
+    <button>Register</button>
+  </div>
+</section>
+
+<!-- CUSTOMER DASHBOARD -->
+<section id="customerDashboard" class="container hidden">
+  <h2>Choose a Forklift</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Forklift #101</h3>
+      <p class="status-available">Available</p>
+      <button>Reserve</button>
+    </div>
+    <div class="card">
+      <h3>Forklift #102</h3>
+      <p class="status-rented">Rented</p>
+    </div>
+    <div class="card">
+      <h3>Forklift #103</h3>
+      <p class="status-maintenance">Under Maintenance</p>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER PROFILE -->
+<section id="customerProfile" class="container hidden">
+  <h2>Your Rental History & Alerts</h2>
+  <div class="card">
+    <table>
+      <tr><th>Forklift</th><th>Rent Date</th><th>Due Date</th><th>Status</th></tr>
+      <tr><td>#101</td><td>09/13/2025</td><td>09/15/2025</td><td>Active</td></tr>
+      <tr><td>#104</td><td>09/10/2025</td><td>09/13/2025</td><td><strong>Due Today</strong></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- OWNER DASHBOARD -->
+<section id="ownerDashboard" class="container hidden">
+  <h2>Owner Dashboard</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Forklift Status</h3>
+      <ul>
+        <li>#101 – Rented</li>
+        <li>#102 – Available</li>
+        <li>#103 – Under Maintenance</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Analytics</h3>
+      <p>Most Used Forklift: <strong>#101</strong></p>
+      <p>Maintenance Priority: <strong>#103</strong></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+  }
+
+  function login() {
+    const role = document.getElementById('role').value;
+    document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+    if (role === 'customer') {
+      document.getElementById('customerDashboard').classList.remove('hidden');
+    } else {
+      document.getElementById('ownerDashboard').classList.remove('hidden');
+    }
+  }
+</script>
+
+</body>
+</html>
